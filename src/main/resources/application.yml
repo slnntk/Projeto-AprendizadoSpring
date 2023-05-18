@@ -3,3 +3,7 @@ spring:
     active: test
   jpa:
     open-in-view: true
+    #Importantissimo, deixando verdadeiro você permite que um
+    #componente no fim do ciclo, chame dnv o banco de dados para chamar o restante.
+    # (deixa mais prático, porém mais complicado.)
+
