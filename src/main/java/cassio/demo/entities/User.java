@@ -4,11 +4,12 @@ import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable {
-
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -20,6 +21,9 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private String password;
+
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
 
     public User() {
     }
@@ -54,6 +58,10 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         return getId() != null ? getId().hashCode() : 0;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     public Long getId() {
