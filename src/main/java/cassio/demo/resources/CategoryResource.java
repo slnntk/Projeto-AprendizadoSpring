@@ -1,7 +1,6 @@
 package cassio.demo.resources;
 
 import cassio.demo.entities.Category;
-import cassio.demo.entities.Order;
 import cassio.demo.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

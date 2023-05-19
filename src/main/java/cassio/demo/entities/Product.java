@@ -28,7 +28,6 @@ public class Product implements Serializable {
     joinColumns = @JoinColumn(name = "product_id"), // nome da chave estrangeira referente a tabela de produto
     inverseJoinColumns = @JoinColumn(name = "category_id") // define a chave estrangeira da outra entidade
     )
-
     private Set<Category> categories = new HashSet<>();
     // Set é interface e Hash é a implementação, tem que usar ele
     // para que não tenham categorias iguais no produto.

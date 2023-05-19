@@ -2,6 +2,7 @@ package cassio.demo.entities;
 
 import cassio.demo.entities.pk.OrderItemPK;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -12,20 +13,20 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_order_item")
-public class OrdemItem implements Serializable {
+public class OrderItem implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
     private Integer quantity;
     private Double price;
 
-    public OrdemItem() {
+    public OrderItem() {
     }
 
-    public OrdemItem(Order order, Product product, Integer quantity, Double price) {
+    public OrderItem(Order order, Product product, Integer quantity, Double price) {
         id.setOrder(order);
         id.setProduct(product);
         this.quantity = quantity;
@@ -38,7 +39,7 @@ public class OrdemItem implements Serializable {
 
     @Override
     public String toString() {
-        return "OrdemItem{" +
+        return "OrderItem{" +
                 "quantity=" + quantity +
                 ", price=" + price +
                 '}';
@@ -47,9 +48,9 @@ public class OrdemItem implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof OrdemItem ordemItem)) return false;
+        if (!(o instanceof OrderItem orderItem)) return false;
 
-        return Objects.equals(id, ordemItem.id);
+        return Objects.equals(id, orderItem.id);
     }
 
     @Override
@@ -57,6 +58,7 @@ public class OrdemItem implements Serializable {
         return id != null ? id.hashCode() : 0;
     }
 
+    @JsonIgnore
     public Order getOrder(){
         return id.getOrder();
     }
