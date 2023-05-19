@@ -1,5 +1,6 @@
 package cassio.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -20,7 +21,9 @@ public class Category implements Serializable {
     private Long id;
     private String name;
 
-    @Transient
+    //@Transient // -> impedir que o JPA tente interpretar.
+    @JsonIgnore // ignorar a categoria quando for chamada por alguem, tirando o loop.
+    @ManyToMany(mappedBy = "categories") // nome da colletion que foi mapeada na classe Product
     private Set<Product> products = new HashSet<>();
     // Set é interface e Hash é a implementação, tem que usar ele
     // para que não tenham produtos iguais dentro da categoria x.

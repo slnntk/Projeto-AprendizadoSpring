@@ -1,6 +1,5 @@
 package cassio.demo.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -9,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "tb_products")
+@Table(name = "tb_product")
 public class Product implements Serializable {
 
     @Serial
@@ -23,7 +22,13 @@ public class Product implements Serializable {
     private Double price;
     private String imgUrl;
 
-    @Transient // -> impedir que o JPA tente interpretar.
+    //@Transient // -> impedir que o JPA tente interpretar.
+    @ManyToMany
+    @JoinTable(name = "tb_product_category", // nome da tabela e a as chaves estrangeiras que vao ser relacionadas
+    joinColumns = @JoinColumn(name = "product_id"), // nome da chave estrangeira referente a tabela de produto
+    inverseJoinColumns = @JoinColumn(name = "category_id") // define a chave estrangeira da outra entidade
+    )
+
     private Set<Category> categories = new HashSet<>();
     // Set é interface e Hash é a implementação, tem que usar ele
     // para que não tenham categorias iguais no produto.
