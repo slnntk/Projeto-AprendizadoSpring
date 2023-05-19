@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -17,6 +19,12 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @Transient
+    private Set<Product> products = new HashSet<>();
+    // Set é interface e Hash é a implementação, tem que usar ele
+    // para que não tenham produtos iguais dentro da categoria x.
+
 
     public Category() {
     }
@@ -45,6 +53,10 @@ public class Category implements Serializable {
     @Override
     public int hashCode() {
         return getId() != null ? getId().hashCode() : 0;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
     }
 
     public String getName() {
