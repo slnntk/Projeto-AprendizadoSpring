@@ -62,10 +62,6 @@ public class User implements Serializable {
         return getId() != null ? getId().hashCode() : 0;
     }
 
-    public List<Order> getOrders() {
-        return orders;
-    }
-
     public Long getId() {
         return id;
     }
@@ -104,5 +100,9 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 }

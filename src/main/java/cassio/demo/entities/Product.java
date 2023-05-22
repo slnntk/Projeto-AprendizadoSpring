@@ -70,18 +70,12 @@ public class Product implements Serializable {
     public int hashCode() {
         return getId() != null ? getId().hashCode() : 0;
     }
-
-    @JsonIgnore
-    public Set<Order> getOrders() {
-        Set<Order> set = new HashSet<>();
-        for (OrderItem x : items){
-            set.add(x.getOrder());
-        }
-        return set;
+    public Long getId() {
+        return id;
     }
 
-    public Set<Category> getCategories() {
-        return categories;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -116,11 +110,16 @@ public class Product implements Serializable {
         this.imgUrl = imgUrl;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Set<Category> getCategories() {
+        return categories;
     }
 
-    public Long getId() {
-        return id;
+    @JsonIgnore
+    public Set<Order> getOrders() {
+        Set<Order> set = new HashSet<>();
+        for (OrderItem x : items) {
+            set.add(x.getOrder());
+        }
+        return set;
     }
 }

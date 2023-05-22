@@ -58,8 +58,12 @@ public class Category implements Serializable {
         return getId() != null ? getId().hashCode() : 0;
     }
 
-    public Set<Product> getProducts() {
-        return products;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -70,11 +74,7 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
+    public Set<Product> getProducts() {
+        return products;
     }
 }

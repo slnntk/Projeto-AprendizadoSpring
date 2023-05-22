@@ -65,8 +65,38 @@ public class Order implements Serializable {
         return getId() != null ? getId().hashCode() : 0;
     }
 
-    public Set<OrderItem> getItems() {
-        return items;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Instant getMoment() {
+        return moment;
+    }
+
+    public void setMoment(Instant moment) {
+        this.moment = moment;
+    }
+
+    public User getClient() {
+        return client;
+    }
+
+    public void setClient(User client) {
+        this.client = client;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return OrderStatus.valueOf(orderStatus);
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        if (orderStatus != null) {
+            this.orderStatus = orderStatus.getCode();
+        }
     }
 
     public Payment getPayment() {
@@ -77,25 +107,15 @@ public class Order implements Serializable {
         this.payment = payment;
     }
 
-    public Long getId() {
-        return id;
+    public Set<OrderItem> getItems() {
+        return items;
     }
 
-    public Instant getMoment() {
-        return moment;
-    }
-
-    public User getClient() {
-        return client;
-    }
-
-    public OrderStatus getOrderStatus() {
-        return OrderStatus.valueOf(orderStatus);
-    }
-
-    public void setOrderStatus(OrderStatus orderStatus) {
-        if (orderStatus != null){
-            this.orderStatus = orderStatus.getCode();
+    public Double getTotal() {
+        double sum = 0.0;
+        for (OrderItem x : items) {
+            sum += x.getSubTotal();
         }
+        return sum;
     }
 }
