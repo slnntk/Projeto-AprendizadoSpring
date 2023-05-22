@@ -1,5 +1,6 @@
 package cassio.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -32,6 +33,8 @@ public class Product implements Serializable {
     // Set é interface e Hash é a implementação, tem que usar ele
     // para que não tenham categorias iguais no produto.
 
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Product() {
     }
@@ -66,6 +69,15 @@ public class Product implements Serializable {
     @Override
     public int hashCode() {
         return getId() != null ? getId().hashCode() : 0;
+    }
+
+    @JsonIgnore
+    public Set<Order> getOrders() {
+        Set<Order> set = new HashSet<>();
+        for (OrderItem x : items){
+            set.add(x.getOrder());
+        }
+        return set;
     }
 
     public Set<Category> getCategories() {
