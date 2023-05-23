@@ -10,11 +10,17 @@ A aplicação é um projeto de web services desenvolvido com Spring Boot e JPA/H
 
 Objetivos 
  Criar projeto Spring Boot Java :heavy_check_mark:
+
  Implementar modelo de domínio :heavy_check_mark:
+
  Estruturar camadas lógicas: resource, service, repository :heavy_check_mark:
+
  Configurar banco de dados de teste (H2) :heavy_check_mark:
+
  Povoar o banco de dados :heavy_check_mark:
+
  CRUD - Create, Retrieve, Update, Delete :heavy_check_mark:
+
  Tratamento de exceções :heavy_check_mark:
 
 ## Modelo conceitual
