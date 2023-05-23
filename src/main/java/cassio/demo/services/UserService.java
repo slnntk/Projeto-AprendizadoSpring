@@ -3,6 +3,7 @@ package cassio.demo.services;
 import cassio.demo.entities.User;
 import cassio.demo.repositories.UserRepository;
 
+import cassio.demo.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,11 @@ public class UserService {
 
     public User findById(Long id){
         Optional<User> obj = repository.findById(id);
-        return obj.get();
+        //return obj.get(); -> antigo porém da exception
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+        // Esse obj.orElseThrow() é simplesmente um get, mas funciona da seguinte forma:
+        // Vou tentar dar o get, se não conseguir vou chamar a Exception pre-definida, passando
+        // o id que deu erro.
     }
 
     public User insert(User obj){
