@@ -31,6 +31,7 @@ Objetivos
 - JPA / Hibernate
 - Maven
 - H2
+- MySQL
 
 # Autor
 
